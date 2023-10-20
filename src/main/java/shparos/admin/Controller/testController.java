@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/test")
+@RequestMapping("/api/v1/admin")
 public class testController {
 
-    @GetMapping("/123")
+    @GetMapping("/test")
     public String example(){
 
-        return "example";
+        return "Admin Service";
 
     }
 }
