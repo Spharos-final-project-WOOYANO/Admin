@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh 'docker run -d --name Admin-Service -p 8080:8000 Admin-Service-Img'
+                sh 'docker run -d --name Admin-Service -p 8004:8000 Admin-Service-Img'
             }
         }
     }
