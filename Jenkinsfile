@@ -18,16 +18,16 @@ pipeline {
         stage('DockerSize'){
             steps {
                 sh '''
-                    docker stop Admin-Service || true
-                    docker rm Admin-Service || true
-                    docker rmi Admin-Service-Img || true
-                    docker build -t Admin-Service-Img:latest .
+                    docker stop admin-service || true
+                    docker rm admin-service || true
+                    docker rmi admin-service-img || true
+                    docker build -t admin-service-img:latest .
                 '''
             }
         }
         stage('Deploy'){
             steps{
-                sh 'docker run -d --name Admin-Service -p 8004:8000 Admin-Service-Img'
+                sh 'docker run -d --name admin-service -p 8004:8000 admin-service-img'
             }
         }
     }
