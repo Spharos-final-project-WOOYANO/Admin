@@ -10,7 +10,7 @@ pipeline {
 	    steps {
 
 		withCredentials([
-			file(credentialsId:'application-secret.yml',variable: 'secret')
+			file(credentialsId:'Wooyano-Secret-File',variable: 'secret')
 		])
 		 {
 			sh '''
