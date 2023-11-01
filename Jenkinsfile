@@ -6,6 +6,20 @@ pipeline {
                 git branch: 'develop',credentialsId:'0-shingo', url:'https://github.com/Spharos-final-project-WOOYANO/Admin'
             }
         }
+	stage('application-secret.yml download'){
+	    steps {
+
+		withCredentials(
+			[file(credentialsId:'application-secret.yml',variable: 'secret')]
+		)
+		script {
+
+		
+		}
+	
+	    }
+
+	}
         stage('Build'){
             steps{
                 script {
