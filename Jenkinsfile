@@ -12,7 +12,6 @@ pipeline {
 		withCredentials([
 			file(credentialsId:'Wooyano-Secret-File',variable: 'secret')
 		])
-		script
 		 {
 			sh "cp \$secret ./src/main/resources/application-secret.yml"
 			echo "${secret}"
