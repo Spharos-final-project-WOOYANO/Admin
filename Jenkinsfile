@@ -15,7 +15,7 @@ pipeline {
 		 {
 			sh'''
 			cp \$secret ./src/main/resources/application-secret.yml
-			chmod +x ./src/main/resources/*.yml
+			cat ./src/main/resources/application-secret.yml
 			'''
 			echo "${secret}"
 		
