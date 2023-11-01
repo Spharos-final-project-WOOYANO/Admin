@@ -31,7 +31,7 @@ pipeline {
                         pwd
 			ls -al ./src/main/resources/
                         chmod +x ./gradlew
-                        ./gradlew build -x test
+                        ./gradlew build
                     '''
                     
                 }
@@ -41,12 +41,13 @@ pipeline {
         stage('DockerSize'){
             steps {
                 sh '''
+		    exit
+      		    pwd
 		    ls -al /jenkins/workspace
                     docker stop admin-service || true
                     docker rm admin-service || true
                     docker rmi admin-service-img || true
                     docker build -t admin-service-img:latest .
-		    exit
                 '''
             }
         }
