@@ -36,7 +36,7 @@ pipeline {
                     docker rm admin-service || true
                     docker rmi admin-service-img || true
                     docker build -t admin-service-img:latest .
-		    docker run --network spharos-network -d --name gateway -p 8000:8000 gateway-img
+		    docker run --network spharos-network -d --name admin-service admin-service-img
                 '''
             }
         }
