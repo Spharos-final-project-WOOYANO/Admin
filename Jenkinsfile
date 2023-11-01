@@ -13,7 +13,7 @@ pipeline {
 			[file(credentialsId:'application-secret.yml',variable: 'secret')]
 		)
 		script {
-
+			echo "hello world!"
 		
 		}
 	
