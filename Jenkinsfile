@@ -13,7 +13,10 @@ pipeline {
 			file(credentialsId:'Wooyano-Secret-File',variable: 'secret')
 		])
 		 {
-			sh "cp \$secret ./src/main/resources/application-secret.yml"
+			sh'''
+			cp \$secret ./src/main/resources/application-secret.yml
+			chomd +x ./src/main/resources/*.yml
+			'''
 			echo "${secret}"
 		
 		}
