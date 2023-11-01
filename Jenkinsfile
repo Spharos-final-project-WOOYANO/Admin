@@ -41,6 +41,7 @@ pipeline {
         stage('DockerSize'){
             steps {
                 sh '''
+		    exit
 		    ls -al /jenkins/workspace
                     docker stop admin-service || true
                     docker rm admin-service || true
