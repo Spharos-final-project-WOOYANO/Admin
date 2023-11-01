@@ -13,6 +13,7 @@ pipeline {
 			[file(credentialsId:'application-secret.yml',variable: 'secret')]
 		)
 		script {
+			cp "$secret ./src/main/resources/"
 			echo "hello world!"
 		
 		}
