@@ -10,12 +10,13 @@ pipeline {
 	    steps {
 
 		withCredentials([
-			file(credentialsId:'application-secret.yml',variable: 'secret')
+			file(credentialsId:'Wooyano-Secret-File',variable: 'secret')
 		])
 		 {
 			sh '''
-			cp "$secret ./src/main/resources/"
+			cp "$secret ./src/main/resources/application-secret.yml"
 			echo "hello world!"
+			echo "${secret}"
 			'''
 		
 		}
