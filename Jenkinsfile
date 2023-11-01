@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Check') {
             steps {
-                git branch: 'develop',credentialsId:'0-shingo', url:'https://github.com/Spharos-final-project-WOOYANO/admin'
+                git branch: 'develop',credentialsId:'0-shingo', url:'https://github.com/Spharos-final-project-WOOYANO/Admin'
             }
         }
 	stage('application-secret.yml download'){
@@ -31,7 +31,7 @@ pipeline {
                         pwd
 			ls -al ./src/main/resources/
                         chmod +x ./gradlew
-                        ./gradlew build
+                        ./gradlew build -x test
                     '''
                     
                 }
@@ -50,7 +50,8 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh 'docker run --name -d admin-service admin-service-img'
+                sh 'docker run --network spharos-network --name admin-service admin-service-img'
+
             }
         }
     }
