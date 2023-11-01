@@ -9,12 +9,14 @@ pipeline {
 	stage('application-secret.yml download'){
 	    steps {
 
-		withCredentials(
-			[file(credentialsId:'application-secret.yml',variable: 'secret')]
-		)
-		script {
+		withCredentials([
+			file(credentialsId:'application-secret.yml',variable: 'secret')
+		])
+		 {
+			sh '''
 			cp "$secret ./src/main/resources/"
 			echo "hello world!"
+			'''
 		
 		}
 	
