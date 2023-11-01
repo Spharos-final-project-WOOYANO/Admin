@@ -29,9 +29,9 @@ pipeline {
                 script {
                     sh '''
                         pwd
-			ls -al ./src/main/resources/
-                        chmod +x ./gradlew
-                        ./gradlew build
+				ls -al ./src/main/resources/
+				chmod +x ./gradlew
+				./gradlew build
                     '''
                     
                 }
@@ -41,9 +41,8 @@ pipeline {
         stage('DockerSize'){
             steps {
                 sh '''
-		    exit
-      		    pwd
-		    ls -al /jenkins/workspace
+		    		exit
+      		    	pwd
                     docker stop admin-service || true
                     docker rm admin-service || true
                     docker rmi admin-service-img || true
@@ -53,7 +52,13 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh 'docker run --network spharos-network -d --name admin-service admin-service-img'
+                sh '''
+				 	docker stop admin-service || true
+                    docker rm admin-service || true
+                    docker rmi admin-service-img || true
+                    docker build -t admin-service-img:latest .
+		 		    docker run --network spharos-network -d --name admin-service admin-service-img
+  					'''
 
             }
         }
