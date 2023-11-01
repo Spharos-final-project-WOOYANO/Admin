@@ -51,6 +51,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 sh 'docker run --network spharos-network --name admin-service admin-service-img'
+
             }
         }
     }
