@@ -29,7 +29,6 @@ pipeline {
                 script {
                     sh '''
                         pwd
-			ls -al ./src/main/resources/
                         chmod +x ./gradlew
                         ./gradlew build
                     '''
