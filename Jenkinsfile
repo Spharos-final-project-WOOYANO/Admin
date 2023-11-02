@@ -3,26 +3,18 @@ pipeline {
     stages {
         stage('Check') {
             steps {
-                git branch: 'develop',credentialsId:'0-shingo', url:'https://github.com/Spharos-final-project-WOOYANO/admin'
+                git branch: 'develop',credentialsId:'0-shingo', url:'https://github.com/Spharos-final-project-WOOYANO/Admin'
             }
         }
-	stage('application-secret.yml download'){
-	    steps {
-
+	stage('Secret-File Download'){
+	    steps{
 		withCredentials([
-			file(credentialsId:'Wooyano-Secret-File',variable: 'secret')
+		    file(credentialsId: 'Wooyano-Secret-File', variable: 'secret')
 		])
-		 {
-			sh'''
-			cp \$secret ./src/main/resources/application-secret.yml
-			cat ./src/main/resources/application-secret.yml
-			'''
-			echo "${secret}"
-		
-		}
-	
+	        {
+	            sh "cp \$secret ./src/main/resources/application-secret.yml"
+	    	}
 	    }
-
 	}
         stage('Build'){
             steps{
@@ -37,22 +29,25 @@ pipeline {
                     
             }
         }
-        stage('DockerSize'){
+	stage('DockerSize'){
             steps {
+	    	script {
+		
                 sh '''
                     docker stop admin-service || true
                     docker rm admin-service || true
                     docker rmi admin-service-img || true
                     docker build -t admin-service-img:latest .
                 '''
+		}
+
             }
         }
         stage('Deploy'){
-            steps{
-                sh 'docker run --name -d admin-service admin-service-img'
+            steps {
+                sh 'docker run --network spharos-network -d --name admin-service admin-service-img'
             }
         }
     }
 }
-
 
