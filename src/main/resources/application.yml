@@ -6,4 +6,3 @@ spring:
     name: admin-service
   profiles:
     default: secret
-

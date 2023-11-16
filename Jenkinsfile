@@ -9,10 +9,10 @@ pipeline {
 	stage('Secret-File Download'){
 	    steps{
 		withCredentials([
-		    file(credentialsId: 'Jwt-Secret-File', variable: 'jwtSecret')
+		    file(credentialsId: 'Admin-Secret-File', variable: 'adminSecret')
 		])
 	        {
-	            sh "cp \$jwtSecret ./src/main/resources/application-secret.yml"
+	            sh "cp \$adminSecret ./src/main/resources/application-secret.yml"
 	    	}
 	    }
 	}
@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'docker run --network spharos-network -e EUREKA_URL="${EUREKA_URL}" -d --name admin-service admin-service-img'
+                sh 'docker run --restart=always --network spharos-network -e EUREKA_URL="${EUREKA_URL}" -d --name admin-service admin-service-img'
             }
         }
     }
